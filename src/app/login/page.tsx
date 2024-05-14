@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useState, FormEvent } from "react";
 import bcrypt from "bcryptjs";
 import { supabase } from "@/lib/supabaseClient";
-// import { useToast } from "@/components/ui/use-toast";
 import { Toast } from "@/components/Toast";
 
 const Login = () => {
@@ -46,7 +45,7 @@ const Login = () => {
       return;
     }
 
-    router.push("/");
+    router.push("/account");
   };
 
   return (

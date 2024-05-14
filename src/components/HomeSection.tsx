@@ -78,7 +78,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({
             {btn1}
           </button>
           {btn2 && (
-            <Link href={`/drive`}>
+            <Link href={`/drive/${id}`}>
               <button className="bg-white bg-opacity-60 text-[#393c41] w-64 px-3 py-3 rounded-full uppercase font-bold cursor-pointer transform hover:-translate-y-1 transition duration-400">
                 {btn2}
               </button>

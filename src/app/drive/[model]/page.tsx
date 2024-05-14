@@ -1,5 +1,6 @@
+// app/drive/[model].tsx
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/utils/cn";
@@ -12,16 +13,18 @@ import modelY from "/public/drive-model-y.avif";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
-import { useRouter, usePathname, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 // Define a type for the model keys
 type ModelKey = "model-s" | "model-3" | "model-x" | "model-y";
 
 export default function Signup() {
-  const pathname = usePathname();
-  const params = useParams();
-  const model = params ? params.model : null;
+  // Get the model from the URL
+  const params = useParams<{ model: string }>();
+  console.log(params);
+  const model = params?.model as ModelKey;
 
+  // Define the initial state for the form fields
   const [email, setEmail] = useState("");
   const [tel, setTel] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -29,9 +32,7 @@ export default function Signup() {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   // Add a new state for the selected model
-  const [selectedModel, setSelectedModel] = useState<ModelKey>(
-    model as ModelKey
-  );
+  const [selectedModel, setSelectedModel] = useState<ModelKey>(model);
 
   const modelImages: Record<ModelKey, StaticImageData> = {
     "model-s": modelS,
@@ -45,8 +46,6 @@ export default function Signup() {
     const value = e.target.value as ModelKey; // Type assertion
     setSelectedModel(value);
   };
-
-  const router = useRouter();
 
   const handleError = (message: string) => {
     setToastMessage(message);
@@ -70,55 +69,40 @@ export default function Signup() {
         ]);
       if (error) throw error;
 
+      // After successfully inserting data into Supabase
+      // Send an email to the user
+      fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          firstname: firstname,
+          lastname: lastname,
+          selectedModel: selectedModel,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Email sent:", data.message);
+        })
+        .catch((error) => {
+          console.error("Failed to send email:", error);
+        });
+
       // Success handling
       setToastMessage("Test drive scheduled successfully!");
       setShowToast(true);
-      // Remain same page to show the toast
     } catch (error: any) {
       handleError(`Error scheduling test drive: ${error.message || error}`);
     }
   };
 
   return (
-    <div className="min-h-screen content-center max-w-2xl w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white ">
-      <form className="my-8" onSubmit={handleSubmit}>
-        {/* <div className="my-8">
-          <h1 className="my-2 text-4xl font-semibold text-neutral-800 dark:text-neutral-200">
-            Schedule a Test Drive
-          </h1>
-          <p className="text-neutral-600 dark:text-neutral-300">
-            Thank you for your interest in test driving a Tesla. We will contact
-            you to review appointment availability. Drivers must be 20 years of
-            age or older and hold a valid driver's license.
-          </p>
-
-          <div className="my-4 flex flex-col md:flex-col space-y-2 md:space-y-0 md:space-x-2 mb-4">
-            <LabelInputContainer>
-              <Label htmlFor="model">Select a Model</Label>
-              <select
-                id="model"
-                className="block w-full p-2 border border-gray-300 rounded-md dark:bg-zinc-800 dark:text-white dark:border-zinc-700"
-                name="model"
-                onChange={handleSelectChange}
-                value={selectedModel}>
-                <option value="model-s">Model S</option>
-                <option value="model-3">Model 3</option>
-                <option value="model-x">Model X</option>
-                <option value="model-y">Model Y</option>
-              </select>
-            </LabelInputContainer>
-
-            <div className="w-full" style={{ margin: "2rem 0" }}>
-              <Image
-                src={modelImages[selectedModel]}
-                alt={selectedModel.replace("-", " ").toUpperCase()}
-                className="w-full h-auto rounded-md"
-              />
-            </div>
-          </div>
-        </div> */}
-
-        <CardContainer className="my-8 inter-var">
+    <div className="min-h-screen content-center max-w-2xl w-full mx-auto rounded-none md:rounded-2xl p-2 md:p-4 shadow-input bg-white ">
+      <form className="my-2" onSubmit={handleSubmit}>
+        <CardContainer className="my-2 inter-var">
           <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
             <CardItem
               translateZ="50"

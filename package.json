@@ -18,6 +18,8 @@
     "clsx": "^2.1.0",
     "express": "^4.19.2",
     "framer-motion": "^11.0.25",
+    "jose": "^5.3.0",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.365.0",
     "next": "14.1.4",
     "nodemailer": "^6.9.13",

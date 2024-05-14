@@ -57,11 +57,8 @@ const NavBar: React.FC = () => {
   };
 
   const handleAccountClick = () => {
-    // if (isLoggedIn()) {
-    //   router.push("/account");
-    // } else {
+    // If the user does not have cookies, redirect to the login page
     router.push("/login");
-    // }
   };
 
   return (
