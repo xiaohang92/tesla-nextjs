@@ -131,7 +131,7 @@ export default function Signup() {
               className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300">
               Thank you for your interest in test driving a Tesla. We will
               contact you to review appointment availability. Drivers must be 20
-              years of age or older and hold a valid driver's license.
+              years of age or older and hold a valid driver&apos;s license.
             </CardItem>
             <CardItem translateZ="70" className="w-full mt-4">
               <LabelInputContainer>
