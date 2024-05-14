@@ -1,112 +1,154 @@
-import Image from "next/image";
+import Head from "next/head";
+import HomeSection from "@/components/HomeSection";
+
+import modelsLarge from "/public/model-s-Large.avif";
+import modelsSmall from "/public/model-s-Small.avif";
+
+import modelyLarge from "/public/model-y-Large.avif";
+import modelySmall from "/public/model-y-Small.avif";
+
+import model3Large from "/public/model-3-Large.avif";
+import model3Small from "/public/model-3-Small.avif";
+
+import modelxLarge from "/public/model-x-Large.avif";
+import modelxSmall from "/public/model-x-Small.avif";
+
+import solarPanelLarge from "/public/solarPanelLarge.avif";
+import solarPanelSmall from "/public/solarPanelSmall.avif";
+
+import solarRoofLarge from "/public/solarRoofLarge.avif";
+import solarRoofSmall from "/public/solarRoofSmall.avif";
+
+import Accessories from "/public/Accessories.jpeg";
+import type { StaticImageData } from "next/image";
+
+interface HomeSectionData {
+  model: string;
+  order: string;
+  orderlink: string;
+  btn1: string;
+  btn2?: string;
+  imgDesktop: StaticImageData;
+  imgMobile: StaticImageData;
+  alt: string;
+  copyright?: boolean;
+  key: string;
+  textColor?: string;
+  id: string;
+}
 
 export default function Home() {
+  const data: HomeSectionData[] = [
+    {
+      model: "Model S",
+      order: "Order Online for ",
+      orderlink: "Touchless Delivery",
+      btn1: "custom order",
+      btn2: "test drive",
+      imgDesktop: modelsLarge, // Desktop image (dimension: 4320 × 2700)
+      imgMobile: modelsSmall, // Mobile image, can be different (dimension: 1125 × 2436)
+      alt: "Model S",
+      key: "1",
+      id: "model-s",
+    },
+    {
+      model: "Model Y",
+      order: "Order Online for ",
+      orderlink: "Touchless Delivery",
+      btn1: "custom order",
+      btn2: "test drive",
+      imgDesktop: modelyLarge,
+      imgMobile: modelySmall,
+      alt: "Model Y",
+      key: "2",
+      id: "model-y",
+    },
+    {
+      model: "Model 3",
+      order: "Order Online for ",
+      orderlink: "Touchless Delivery",
+      btn1: "custom order",
+      btn2: "test drive",
+      imgDesktop: model3Large,
+      imgMobile: model3Small,
+      alt: "Model 3",
+      key: "3",
+      id: "model-3",
+    },
+    {
+      model: "Model X",
+      order: "Order Online for ",
+      orderlink: "Touchless Delivery",
+      btn1: "custom order",
+      btn2: "test drive",
+      imgDesktop: modelxLarge,
+      imgMobile: modelxSmall,
+      alt: "Model X",
+      key: "4",
+      id: "model-x",
+    },
+    {
+      model: "Solar Panels",
+      order: "Lowest Cost Solar Panels in America",
+      orderlink: "",
+      btn1: "order now",
+      btn2: "learn more",
+      imgDesktop: solarPanelLarge,
+      imgMobile: solarPanelSmall,
+      alt: "Solar Panels",
+      key: "5",
+      textColor: "#a2a4a6",
+      id: "solar-panels",
+    },
+    {
+      model: "Solar Roof",
+      order: "Produce Clean Energy From Your Roof",
+      orderlink: "",
+      btn1: "order now",
+      btn2: "learn more",
+      imgDesktop: solarRoofLarge,
+      imgMobile: solarRoofSmall,
+      alt: "Solar Roof",
+      key: "6",
+      id: "solar-roof",
+    },
+    {
+      model: "Accessories",
+      order: "",
+      orderlink: "",
+      btn1: "Shop now",
+      imgDesktop: Accessories,
+      imgMobile: Accessories,
+      alt: "Accessories",
+      copyright: true,
+      key: "7",
+      id: "accessories",
+    },
+  ];
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+    <main>
+      <Head>
+        <title>Electric Cars, Solar & Clean Energy | Tesla</title>
+      </Head>
+      <div
+        className="overflow-y-scroll h-screen snap-y snap-mandatory scroll-snap-type"
+        style={{ WebkitOverflowScrolling: "touch" }}>
+        {data.map((item) => (
+          <HomeSection
+            key={item.key}
+            model={item.model}
+            order={item.order}
+            orderlink={item.orderlink}
+            btn1={item.btn1}
+            btn2={item.btn2}
+            imgDesktop={item.imgDesktop}
+            imgMobile={item.imgMobile}
+            alt={item.alt}
+            copyright={item.copyright}
+            textColor={item.textColor}
+            id={item.id}
+          />
+        ))}
       </div>
     </main>
   );
