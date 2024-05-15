@@ -5,6 +5,7 @@ import { useState, FormEvent } from "react";
 import bcrypt from "bcryptjs";
 import { supabase } from "@/lib/supabaseClient";
 import { Toast } from "@/components/Toast";
+import { setCookie } from "cookies-next";
 
 const Login = () => {
   const router = useRouter();
@@ -44,6 +45,12 @@ const Login = () => {
       handleError("Invalid password");
       return;
     }
+
+    // Set cookie
+    setCookie("id", user.id, {
+      maxAge: 1 * 24 * 60 * 60, // 1 days
+      path: "/",
+    });
 
     router.push("/account");
   };

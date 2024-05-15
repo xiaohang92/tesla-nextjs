@@ -7,20 +7,9 @@ import React, { useState } from "react";
 import { Suspense } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion"; // Import VariantLabels and TargetAndTransition
+import { getCookie } from "cookies-next";
 
 const Sidenav = React.lazy(() => import("./Sidenav")); // Lazy-load the Sidenav component
-
-// interface HoverVariants {
-//   hover: {
-//     backgroundColor: string;
-//     borderRadius: string;
-//     transition: {
-//       type: "spring";
-//       stiffness: number;
-//       duration: number;
-//     };
-//   };
-// }
 
 const NavBar: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -58,7 +47,9 @@ const NavBar: React.FC = () => {
 
   const handleAccountClick = () => {
     // If the user does not have cookies, redirect to the login page
-    router.push("/login");
+    if (!getCookie("id")) router.push("/login");
+    // If the user has cookies, redirect to the account page
+    else router.push("/account");
   };
 
   return (
@@ -85,15 +76,6 @@ const NavBar: React.FC = () => {
           </div>
         )}
         <div className="flex items-center">
-          {/* <div className="hidden md:flex">
-            <motion.div
-              onClick={() => {}}
-              className="mx-2 cursor-pointer p-1 rounded-lg "
-              variants={hoverVariant}
-              whileHover="hover">
-              Shop
-            </motion.div>
-          </div> */}
           <motion.div
             onClick={handleAccountClick}
             className="mx-2 cursor-pointer p-1 rounded-lg "
@@ -101,14 +83,6 @@ const NavBar: React.FC = () => {
             whileHover="hover">
             Account
           </motion.div>
-
-          {/* <motion.div
-            onClick={() => setOpen(!open)}
-            className="cursor-pointer p-1 rounded-lg"
-            variants={hoverVariant}
-            whileHover="hover">
-            {" "}
-          </motion.div> */}
         </div>
       </nav>
       {open && (

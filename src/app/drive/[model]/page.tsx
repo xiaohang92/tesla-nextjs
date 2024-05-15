@@ -14,6 +14,7 @@ import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { useParams } from "next/navigation";
+import { getCookie } from "cookies-next";
 
 // Define a type for the model keys
 type ModelKey = "model-s" | "model-3" | "model-x" | "model-y";
@@ -54,19 +55,48 @@ export default function Signup() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Check if the user is logged in
+    const idFromCookie = getCookie("id") as string;
+
+    if (!idFromCookie) {
+      handleError("Please log in to schedule a test drive");
+      return;
+    }
+
+    // First check if a test drive request already exists for the selected model by this user
+    const { data: existingTestDrives, error: checkError } = await supabase
+      .from("test_drives")
+      .select("*")
+      .eq("member_id", idFromCookie)
+      .eq("selected_model", selectedModel);
+
+    if (checkError) {
+      handleError(
+        `Error checking for existing test drives: ${
+          checkError.message || checkError
+        }`
+      );
+      return;
+    }
+
+    // If an existing test drive is found, prevent new insertion and notify the user
+    if (existingTestDrives.length > 0) {
+      handleError("You have already scheduled a test drive for this model.");
+      return;
+    }
 
     try {
-      const { error } = await supabase
-        .from("test_drives") // Change to your test_drives table
-        .insert([
-          {
-            email: email, // Value from state
-            tel: tel, // Value from state
-            selected_model: selectedModel, // Value from state
-            firstname: firstname, // Assuming you have this state
-            lastname: lastname, // Assuming you have this state
-          },
-        ]);
+      // Proceed to insert a new test drive request
+      const { error } = await supabase.from("test_drives").insert([
+        {
+          email: email, // Value from state
+          tel: tel, // Value from state
+          selected_model: selectedModel, // Value from state
+          firstname: firstname, // Assuming you have this state
+          lastname: lastname, // Assuming you have this state
+          member_id: idFromCookie, // Value from cookie
+        },
+      ]);
       if (error) throw error;
 
       // After successfully inserting data into Supabase
