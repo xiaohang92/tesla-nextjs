@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { getCookie } from "cookies-next";
 import { supabase } from "@/lib/supabaseClient";
+import { redirect } from "next/dist/server/api-utils";
 
 interface Profile {
   email: string;
@@ -66,7 +67,29 @@ export default function Account() {
       <div className="min-h-screen max-w-2xl w-full content-center container mx-auto py-20">
         {/* Account */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Account</h1>
+          <div className="flex justify-between items-center mb-2">
+            <h1 className="text-3xl font-bold">Account</h1>
+            <button
+              onClick={() => {
+                document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                window.location.href = "/";
+              }}
+              className="text-sm text-gray-500 underline cursor-pointer flex items-center">
+              <svg
+                className="w-6 h-6 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H5a3 3 0 01-3-3V7a3 3 0 013-3h5a3 3 0 013 3v1"></path>
+              </svg>
+              Logout
+            </button>
+          </div>
           <div className="flex items-start gap-4">
             <Image
               src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -82,12 +105,17 @@ export default function Account() {
               </h3>
 
               <p className="mt-0.5 text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptates voluptas distinctio nesciunt quas non animi.
+                Please wait while we load your profile details.
               </p>
             </div>
           </div>
         </div>
+        <span className="relative flex justify-center">
+          <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75"></div>
+          <span className="relative z-10 bg-white px-6">
+            Pulling Test Drive Request Details
+          </span>
+        </span>
       </div>
     );
   }
@@ -97,7 +125,30 @@ export default function Account() {
       <div className="min-h-screen max-w-2xl w-full content-center container mx-auto py-20">
         {/* Account */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Account</h1>
+          <div className="flex justify-between items-center mb-2">
+            <h1 className="text-3xl font-bold">Account</h1>
+            <button
+              onClick={() => {
+                document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                window.location.href = "/";
+              }}
+              className="text-sm text-gray-500 underline cursor-pointer flex items-center">
+              <svg
+                className="w-6 h-6 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H5a3 3 0 01-3-3V7a3 3 0 013-3h5a3 3 0 013 3v1"></path>
+              </svg>
+              Logout
+            </button>
+          </div>
+          {/* Profile Section */}
           <div className="flex items-start gap-4">
             <Image
               src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

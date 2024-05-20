@@ -22,7 +22,7 @@ type ModelKey = "model-s" | "model-3" | "model-x" | "model-y";
 export default function Signup() {
   // Get the model from the URL
   const params = useParams<{ model: string }>();
-  console.log(params);
+
   const model = params?.model as ModelKey;
 
   // Define the initial state for the form fields

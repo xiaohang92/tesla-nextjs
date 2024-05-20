@@ -26,8 +26,10 @@ interface HomeSectionData {
   model: string;
   order: string;
   orderlink: string;
-  btn1: string;
+  btn1?: string;
   btn2?: string;
+  btn3?: string;
+  btn4?: string;
   imgDesktop: StaticImageData;
   imgMobile: StaticImageData;
   alt: string;
@@ -43,7 +45,7 @@ export default function Home() {
       model: "Model S",
       order: "Order Online for ",
       orderlink: "Touchless Delivery",
-      btn1: "custom order",
+      btn1: "Order now",
       btn2: "test drive",
       imgDesktop: modelsLarge, // Desktop image (dimension: 4320 × 2700)
       imgMobile: modelsSmall, // Mobile image, can be different (dimension: 1125 × 2436)
@@ -55,7 +57,7 @@ export default function Home() {
       model: "Model Y",
       order: "Order Online for ",
       orderlink: "Touchless Delivery",
-      btn1: "custom order",
+      btn1: "Order now",
       btn2: "test drive",
       imgDesktop: modelyLarge,
       imgMobile: modelySmall,
@@ -67,7 +69,7 @@ export default function Home() {
       model: "Model 3",
       order: "Order Online for ",
       orderlink: "Touchless Delivery",
-      btn1: "custom order",
+      btn1: "Order now",
       btn2: "test drive",
       imgDesktop: model3Large,
       imgMobile: model3Small,
@@ -79,7 +81,7 @@ export default function Home() {
       model: "Model X",
       order: "Order Online for ",
       orderlink: "Touchless Delivery",
-      btn1: "custom order",
+      btn1: "Order now",
       btn2: "test drive",
       imgDesktop: modelxLarge,
       imgMobile: modelxSmall,
@@ -91,8 +93,7 @@ export default function Home() {
       model: "Solar Panels",
       order: "Lowest Cost Solar Panels in America",
       orderlink: "",
-      btn1: "order now",
-      btn2: "learn more",
+      btn3: "Incoming",
       imgDesktop: solarPanelLarge,
       imgMobile: solarPanelSmall,
       alt: "Solar Panels",
@@ -104,8 +105,7 @@ export default function Home() {
       model: "Solar Roof",
       order: "Produce Clean Energy From Your Roof",
       orderlink: "",
-      btn1: "order now",
-      btn2: "learn more",
+      btn3: "Incoming",
       imgDesktop: solarRoofLarge,
       imgMobile: solarRoofSmall,
       alt: "Solar Roof",
@@ -116,7 +116,7 @@ export default function Home() {
       model: "Accessories",
       order: "",
       orderlink: "",
-      btn1: "Shop now",
+      btn4: "Incoming",
       imgDesktop: Accessories,
       imgMobile: Accessories,
       alt: "Accessories",
@@ -141,6 +141,8 @@ export default function Home() {
             orderlink={item.orderlink}
             btn1={item.btn1}
             btn2={item.btn2}
+            btn3={item.btn3}
+            btn4={item.btn4}
             imgDesktop={item.imgDesktop}
             imgMobile={item.imgMobile}
             alt={item.alt}

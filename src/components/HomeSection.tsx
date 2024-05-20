@@ -11,8 +11,10 @@ interface HomeSectionProps {
   model: string;
   order: string;
   orderlink: string;
-  btn1: string;
+  btn1?: string;
   btn2?: string;
+  btn3?: string;
+  btn4?: string;
   imgDesktop: StaticImageData;
   imgMobile: StaticImageData;
   alt: string;
@@ -27,6 +29,8 @@ const HomeSection: React.FC<HomeSectionProps> = ({
   orderlink,
   btn1,
   btn2,
+  btn3,
+  btn4,
   imgDesktop,
   imgMobile,
   alt,
@@ -74,15 +78,29 @@ const HomeSection: React.FC<HomeSectionProps> = ({
         </div>
 
         <div className="flex flex-col items-center gap-4">
-          <button className="bg-[#171a20c9] text-white w-64 px-3 py-3 rounded-full uppercase font-bold cursor-pointer">
-            {btn1}
-          </button>
+          {btn1 && (
+            <Link href={`/order/${id}`}>
+              <button className="bg-[#171a20c9] text-white w-64 px-3 py-3 rounded-full uppercase font-bold cursor-pointer">
+                {btn1}
+              </button>
+            </Link>
+          )}
           {btn2 && (
             <Link href={`/drive/${id}`}>
               <button className="bg-white bg-opacity-60 text-[#393c41] w-64 px-3 py-3 rounded-full uppercase font-bold cursor-pointer transform hover:-translate-y-1 transition duration-400">
                 {btn2}
               </button>
             </Link>
+          )}
+          {btn3 && (
+            <button className="bg-white bg-opacity-60 text-[#393c41] w-64 px-3 py-3 rounded-full uppercase font-bold cursor-pointer transform hover:-translate-y-1 transition duration-400">
+              {btn3}
+            </button>
+          )}
+          {btn4 && (
+            <button className="bg-[#171a20c9] text-white w-64 px-3 py-3 rounded-full uppercase font-bold cursor-pointer">
+              {btn4}
+            </button>
           )}
         </div>
       </motion.div>
