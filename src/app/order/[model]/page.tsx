@@ -116,7 +116,7 @@ export default function Order() {
               <p className="mb-2">Model: {model}</p>
               <p className="mb-2">Price: ${priceAmounts[model]}</p>
               <p className="mb-2">Color: Black</p>
-              <p className="mb-2">Wheels: 20" Induction Wheels</p>
+              <p className="mb-2">Wheels: 20&quot; Induction Wheels</p>
               <p className="mb-2">Interior: Black and White</p>
               <p className="mb-2">Self Driving: Yes</p>
               <p className="mb-2">Estimated Delivery: 2-4 weeks</p>
