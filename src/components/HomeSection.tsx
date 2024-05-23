@@ -58,13 +58,15 @@ const HomeSection: React.FC<HomeSectionProps> = ({
     <div
       id={id}
       className="flex flex-col justify-around items-center snap-start h-screen w-full relative">
-      <Image
-        src={imgSrc}
-        alt={alt}
-        className="absolute z-[-1]"
-        style={{ objectFit: "cover", objectPosition: "center" }}
-        fill
-      />
+      {mounted && (
+        <Image
+          src={imgSrc}
+          alt={alt}
+          className="absolute z-[-1]"
+          style={{ objectFit: "cover", objectPosition: "center" }}
+          fill
+        />
+      )}
 
       <motion.div
         className="z-20 w-full flex flex-col items-center mt-auto pb-[5vh] text-center gap-4"
