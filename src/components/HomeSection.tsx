@@ -47,6 +47,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({
 
   const screenWidth = useWindowWidth(); // Custom hook to get screen width
   const [mounted, setMounted] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
@@ -58,6 +59,11 @@ const HomeSection: React.FC<HomeSectionProps> = ({
     <div
       id={id}
       className="flex flex-col justify-around items-center snap-start h-screen w-full relative">
+      {/* Background placeholder */}
+      <div
+        className="absolute z-[-1] w-full h-full bg-gray-200"
+        style={{ display: loading ? "block" : "none" }}></div>
+
       {mounted && (
         <Image
           src={imgSrc}
@@ -65,6 +71,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({
           className="absolute z-[-1]"
           style={{ objectFit: "cover", objectPosition: "center" }}
           fill
+          onLoadingComplete={() => setLoading(false)}
         />
       )}
 
