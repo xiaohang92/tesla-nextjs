@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add this to your global CSS file or the specific CSS module */
+@media (max-width: 767px) {
+  .pb-mobile-safe {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 16px);
+  }
+}

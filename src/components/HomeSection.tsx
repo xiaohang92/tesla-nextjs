@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import useWindowWidth from "@/hooks/useWindowWidth"; // Adjust the path
 import { StaticImageData } from "next/image"; // Import type for static images
 import Link from "next/link";
-import { Skeleton } from "@/components/ui/skeleton"; // Import the Skeleton component
 
 interface HomeSectionProps {
   model: string;
@@ -48,7 +47,6 @@ const HomeSection: React.FC<HomeSectionProps> = ({
 
   const screenWidth = useWindowWidth(); // Custom hook to get screen width
   const [mounted, setMounted] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
@@ -67,12 +65,11 @@ const HomeSection: React.FC<HomeSectionProps> = ({
           className="absolute z-[-1]"
           style={{ objectFit: "cover", objectPosition: "center" }}
           fill
-          onLoadingComplete={() => setLoading(false)}
         />
       )}
 
       <motion.div
-        className="z-20 w-full flex flex-col items-center mt-auto pb-[5vh] text-center gap-4"
+        className="z-20 w-full flex flex-col items-center mt-auto pb-[5vh] pb-mobile-safe text-center gap-4"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
