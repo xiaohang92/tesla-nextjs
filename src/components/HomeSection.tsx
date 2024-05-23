@@ -57,7 +57,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({
   return (
     <div
       id={id}
-      className="flex flex-col justify-around items-center snap-start h-screen w-full relative">
+      className="flex flex-col justify-around items-center snap-start h-screen w-full relative pb-mobile-safe">
       {mounted && (
         <Image
           src={imgSrc}
@@ -69,7 +69,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({
       )}
 
       <motion.div
-        className="z-20 w-full flex flex-col items-center mt-auto pb-[5vh] pb-mobile-safe text-center gap-4"
+        className="z-20 w-full flex flex-col items-center mt-auto pb-[5vh] text-center gap-4"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
