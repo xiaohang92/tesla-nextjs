@@ -60,7 +60,7 @@ export default function Account() {
     };
 
     fetchData();
-  }, []);
+  }, [idFromCookie]);
 
   if (!profile) {
     return (

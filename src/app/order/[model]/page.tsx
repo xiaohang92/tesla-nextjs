@@ -13,7 +13,6 @@ import { Toast } from "@/components/Toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import copy from "clipboard-copy";
-import { Skeleton } from "@/components/ui/skeleton";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -93,7 +92,7 @@ export default function Order() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full content-center container">
+    <div className="min-h-screen w-full content-center container py-16">
       <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between">
         {/* Image Slideshow */}
         <div className="w-full lg:w-1/2">
@@ -102,7 +101,7 @@ export default function Order() {
               src={modelImages[model]}
               alt={model}
               fill
-              className="object-cover rounded-md"
+              className="object-contain rounded-md"
             />
           </div>
         </div>
