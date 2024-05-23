@@ -1,6 +1,6 @@
 // src/components/HomeSection.tsx
 "use client";
-import React from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import useWindowWidth from "@/hooks/useWindowWidth"; // Adjust the path
@@ -46,6 +46,12 @@ const HomeSection: React.FC<HomeSectionProps> = ({
   };
 
   const screenWidth = useWindowWidth(); // Custom hook to get screen width
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const imgSrc = screenWidth >= 768 ? imgDesktop : imgMobile; // Choose image based on screen width
 
   return (
