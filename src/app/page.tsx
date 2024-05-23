@@ -21,6 +21,8 @@ import solarRoofSmall from "/public/solarRoofSmall.avif";
 
 import Accessories from "/public/Accessories.jpeg";
 import type { StaticImageData } from "next/image";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 interface HomeSectionData {
   model: string;
@@ -134,22 +136,24 @@ export default function Home() {
         className="overflow-y-scroll h-screen snap-y snap-mandatory scroll-snap-type"
         style={{ WebkitOverflowScrolling: "touch" }}>
         {data.map((item) => (
-          <HomeSection
-            key={item.key}
-            model={item.model}
-            order={item.order}
-            orderlink={item.orderlink}
-            btn1={item.btn1}
-            btn2={item.btn2}
-            btn3={item.btn3}
-            btn4={item.btn4}
-            imgDesktop={item.imgDesktop}
-            imgMobile={item.imgMobile}
-            alt={item.alt}
-            copyright={item.copyright}
-            textColor={item.textColor}
-            id={item.id}
-          />
+          <Suspense fallback={<Loading />} key={item.key}>
+            <HomeSection
+              key={item.key}
+              model={item.model}
+              order={item.order}
+              orderlink={item.orderlink}
+              btn1={item.btn1}
+              btn2={item.btn2}
+              btn3={item.btn3}
+              btn4={item.btn4}
+              imgDesktop={item.imgDesktop}
+              imgMobile={item.imgMobile}
+              alt={item.alt}
+              copyright={item.copyright}
+              textColor={item.textColor}
+              id={item.id}
+            />
+          </Suspense>
         ))}
       </div>
     </main>

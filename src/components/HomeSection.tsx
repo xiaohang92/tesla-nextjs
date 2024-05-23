@@ -1,11 +1,12 @@
 // src/components/HomeSection.tsx
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import useWindowWidth from "@/hooks/useWindowWidth"; // Adjust the path
 import { StaticImageData } from "next/image"; // Import type for static images
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton"; // Import the Skeleton component
 
 interface HomeSectionProps {
   model: string;
@@ -59,11 +60,6 @@ const HomeSection: React.FC<HomeSectionProps> = ({
     <div
       id={id}
       className="flex flex-col justify-around items-center snap-start h-screen w-full relative">
-      {/* Background placeholder */}
-      <div
-        className="absolute z-[-1] w-full h-full bg-gray-200"
-        style={{ display: loading ? "block" : "none" }}></div>
-
       {mounted && (
         <Image
           src={imgSrc}

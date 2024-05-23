@@ -13,6 +13,7 @@ import { Toast } from "@/components/Toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import copy from "clipboard-copy";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
