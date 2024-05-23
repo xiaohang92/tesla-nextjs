@@ -1,3 +1,4 @@
+"use client";
 import Head from "next/head";
 import HomeSection from "@/components/HomeSection";
 
@@ -21,8 +22,7 @@ import solarRoofSmall from "/public/solarRoofSmall.avif";
 
 import Accessories from "/public/Accessories.jpeg";
 import type { StaticImageData } from "next/image";
-import { Suspense } from "react";
-import Loading from "./loading";
+import { useEffect } from "react";
 
 interface HomeSectionData {
   model: string;
@@ -127,6 +127,38 @@ export default function Home() {
       id: "accessories",
     },
   ];
+
+  useEffect(() => {
+    // Check if there's a saved section ID in sessionStorage
+    const lastViewedSectionId = sessionStorage.getItem("lastViewedSectionId");
+    if (lastViewedSectionId) {
+      const element = document.getElementById(lastViewedSectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          sessionStorage.setItem("lastViewedSectionId", id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.5,
+    });
+
+    const sections = document.querySelectorAll(".home-section");
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
+
   return (
     <main>
       <Head>
@@ -136,7 +168,7 @@ export default function Home() {
         className="overflow-y-scroll h-screen snap-y snap-mandatory scroll-snap-type"
         style={{ WebkitOverflowScrolling: "touch" }}>
         {data.map((item) => (
-          <Suspense fallback={<Loading />} key={item.key}>
+          <div key={item.key} className="home-section" id={item.id}>
             <HomeSection
               key={item.key}
               model={item.model}
@@ -153,7 +185,7 @@ export default function Home() {
               textColor={item.textColor}
               id={item.id}
             />
-          </Suspense>
+          </div>
         ))}
       </div>
     </main>

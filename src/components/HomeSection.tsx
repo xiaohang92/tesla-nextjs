@@ -64,6 +64,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({
           alt={alt}
           className="absolute z-[-1]"
           style={{ objectFit: "cover", objectPosition: "center" }}
+          placeholder="blur"
           fill
         />
       )}

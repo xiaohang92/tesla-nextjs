@@ -101,6 +101,7 @@ export default function Order() {
               src={modelImages[model]}
               alt={model}
               fill
+              placeholder="blur"
               className="object-contain rounded-md"
             />
           </div>
@@ -136,9 +137,12 @@ export default function Order() {
           {/* Info Icon (popover when clicked) */}
           <div className="absolute top-4 right-4">
             <button
-              className="w-10 h-10 bg-gray-200 p-2 rounded-full hover:bg-gray-300 transition"
+              className="w-10 h-10 bg-gray-200 p-2 rounded-full hover:bg-gray-300 transition flex items-center justify-center"
               onClick={() => setShowInfo(!showInfo)}>
-              <FontAwesomeIcon icon={faInfo} className="text-gray-600" />
+              <FontAwesomeIcon
+                icon={faInfo}
+                className="text-gray-600 text-base"
+              />
             </button>
 
             {showInfo && (
