@@ -1,10 +1,7 @@
 // src/components/HomeSection.tsx
-"use client";
-import { useState, useEffect, Suspense } from "react";
-import Image from "next/image";
+
+import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
-import useWindowWidth from "@/hooks/useWindowWidth"; // Adjust the path
-import { StaticImageData } from "next/image"; // Import type for static images
 import Link from "next/link";
 
 interface HomeSectionProps {
@@ -45,29 +42,30 @@ const HomeSection: React.FC<HomeSectionProps> = ({
     visible: { opacity: 1, y: 0 },
   };
 
-  const screenWidth = useWindowWidth(); // Custom hook to get screen width
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const imgSrc = screenWidth >= 768 ? imgDesktop : imgMobile; // Choose image based on screen width
-
   return (
     <div
       id={id}
       className="flex flex-col justify-around items-center snap-start h-screen w-full relative pb-mobile-safe">
-      {mounted && (
-        <Image
-          src={imgSrc}
-          alt={alt}
-          className="absolute z-[-1]"
-          style={{ objectFit: "cover", objectPosition: "center" }}
-          placeholder="blur"
-          fill
-        />
-      )}
+      <Image
+        src={imgDesktop}
+        alt={alt}
+        className="absolute z-[-1] hidden lg:block"
+        style={{ objectFit: "cover", objectPosition: "center" }}
+        placeholder="blur"
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        fill
+        priority
+      />
+      <Image
+        src={imgMobile}
+        alt={alt}
+        className="absolute z-[-1] lg:hidden"
+        style={{ objectFit: "cover", objectPosition: "center" }}
+        placeholder="blur"
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        fill
+        priority
+      />
 
       <motion.div
         className="z-20 w-full flex flex-col items-center mt-auto pb-[5vh] text-center gap-4"

@@ -57,7 +57,7 @@ const NavBar: React.FC = () => {
       <nav className="fixed top-0 z-10 flex w-full items-center justify-between bg-transparent py-5 px-5">
         <Link href="/">
           <div className="cursor-pointer">
-            <Image src={logo} width={120} alt="logo" />
+            <Image src={logo} width={120} alt="logo" priority />
           </div>
         </Link>
         {pathname === "/" && (
